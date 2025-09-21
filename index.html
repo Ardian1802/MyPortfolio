@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ardian Pramana Putra | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <!-- AOS Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f8fafc;
+      color: #222;
+    }
+    nav.navbar {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .navbar-brand span {
+      color: #6f42c1;
+      font-weight: bold;
+    }
+    .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+      color: #6f42c1 !important;
+    }
+    .scroll-button {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      display: none;
+    }
+    .scroll-button.show {
+      display: block;
+      animation: fadeInUp .5s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .home-section {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(120deg, #f3eaff 0%, #fff 100%);
+    }
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 24px auto;
+      box-shadow: 0 4px 24px #b983ff44;
+      border: 6px solid #fff;
+    }
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .btn-main, .btn-main-outline {
+      border-radius: 30px;
+      padding: 10px 32px;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all .2s;
+    }
+    .btn-main {
+      background: #6f42c1;
+      color: #fff;
+      border: none;
+    }
+    .btn-main:hover {
+      background: #512a97;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 16px #b983ff44;
+    }
+    .btn-main-outline {
+      border: 2px solid #6f42c1;
+      color: #6f42c1;
+      background: #fff;
+    }
+    .btn-main-outline:hover {
+      background: #6f42c1;
+      color: #fff;
+    }
+    .card-title {
+      font-size: 1.15em;
+    }
+    .hover-shadow:hover {
+      box-shadow: 0 0.5rem 1.5rem rgba(111,66,193,.15)!important;
+      transform: translateY(-4px) scale(1.03);
+      transition: .2s;
+    }
+    .project-cards .card {
+      transition: box-shadow .2s, transform .2s;
+      cursor: pointer;
+      border-radius: 18px;
+      overflow: hidden;
+      border: none;
+    }
+    .project-cards .card:hover {
+      box-shadow: 0 0.5rem 1.5rem #b983ff33;
+      transform: translateY(-6px) scale(1.03);
+    }
+    .project-cards .card img {
+      border-radius: 0;
+      height: 180px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .project-tabs .btn {
+      border-radius: 30px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      background: #f3eaff;
+      color: #6f42c1;
+      border: none;
+      transition: .2s;
+    }
+    .project-tabs .btn.active, .project-tabs .btn:hover {
+      background: #6f42c1;
+      color: #fff;
+    }
+    footer {
+      background: #fff;
+      padding: 18px 0 8px 0;
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      margin-top: 48px;
+      border-top: 1px solid #eee;
+    }
+    @media (max-width: 991px) {
+      .profile-img { width: 120px; height: 120px; }
+      .home-section { min-height: 60vh; }
+    }
+    @media (max-width: 767px) {
+      .home-section { flex-direction: column; text-align: center; }
+      .profile-img { margin-bottom: 16px; }
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-image: none;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-control-prev-icon::after,
+    .carousel-control-next-icon::after {
+      content: '';
+      display: block;
+      width: 1.2rem;
+      height: 1.2rem;
+      border: solid #fff;
+      border-width: 0 0.3rem 0.3rem 0;
+      padding: 0.2rem;
+    }
+    .carousel-control-prev-icon::after {
+      transform: rotate(135deg);
+      margin-left: 0.3rem;
+    }
+    .carousel-control-next-icon::after {
+      transform: rotate(-45deg);
+      margin-right: 0.3rem;
+    }
+    /* Sertifikat Section Spacing */
+    .sertifikat .row.g-4 {
+      row-gap: 32px !important;
+    }
+    .sertifikat .col-md-4,
+    .sertifikat .col-lg-3 {
+      display: flex;
+      justify-content: center;
+      /* Ensure side borders (bingkai samping) are visible */
+      align-items: stretch;
+    }
+    .sertifikat .card {
+      width: 320px;
+      height: 240px;
+      margin: auto;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Make sure border is visible on all sides */
+      box-sizing: border-box;
+    }
+    .sertifikat .card > .bg-white {
+      border: 6px solid #b983ff;
+      border-radius: 16px;
+      width: 300px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll to top button -->
+  <div class="scroll-button" id="scrollBtn">
+    <a href="#home" class="btn btn-main btn-lg rounded-circle shadow"><i class="fas fa-arrow-up"></i></a>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Portfolio<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills & Service</a></li>
+          <li class="nav-item"><a class="nav-link" href="#techstack">Techstack</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sertifikat">Sertifikat</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex ms-lg-3">
+          <a href="https://www.instagram.com/ardianpramana_18?igsh=MXUwa2U5MDU4eTM3cw==" class="text-primary fs-5 me-3"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/Ardian1802" class="text-primary fs-5"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section Start -->
+  <section class="home-section position-relative" id="home" style="background: linear-gradient(120deg, #f3eaff 0%, #fff 100%); overflow:hidden;">
+    <!-- Background icon.png -->
+    <div style="position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;">
+      <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-height:100%; min-width:100%;">
+        <defs>
+          <linearGradient id="bg-gradient" x1="0" y1="0" x2="1440" y2="600" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#b983ff"/>
+            <stop offset="1" stop-color="#6f42c1"/>
+          </linearGradient>
+        </defs>
+        <circle cx="1200" cy="100" r="220" fill="url(#bg-gradient)" opacity="0.18">
+          <animate attributeName="cy" values="100;180;100" dur="8s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="300" cy="500" r="180" fill="url(#bg-gradient)" opacity="0.13">
+          <animate attributeName="cx" values="300;400;300" dur="7s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="900" cy="400" r="120" fill="#fff" opacity="0.08">
+          <animate attributeName="cy" values="400;350;400" dur="6s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+    </div>
+    <div class="container position-relative" style="z-index:1;">
+      <div class="row align-items-center justify-content-center flex-lg-row flex-column-reverse">
+        <div class="col-lg-7 text-center text-lg-start" data-aos="fade-right" style="position:relative;">
+          <h1 class="display-4 fw-bold mb-2 position-relative" style="display:inline-block;">
+            Hello, I'm <span class="text-primary position-relative" style="z-index:2;">
+              Ardian Pramana Putra
+              <!-- Floating tech icons around the name -->
+              
+          </h1>
+          <h3 class="mb-3 fw-normal">Web Developer</h3>
+          <p class="lead mb-4">From Medan</p>
+          <a href="#contact" class="btn btn-main btn-lg me-2">Hire Me</a>
+        </div>
+        <div class="col-lg-5 mb-4 mb-lg-0 text-center" data-aos="fade-left">
+          <div class="profile-img mx-auto d-flex align-items-center justify-content-center" style="background:transparent; position:relative;">
+            <!-- Main SVG -->
+            <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index:1; position:relative;">
+              <rect x="30" y="40" width="100" height="60" rx="10" fill="#6f42c1" />
+              <rect x="40" y="50" width="80" height="40" rx="5" fill="#fff"/>
+              <rect x="30" y="100" width="100" height="12" rx="6" fill="#b983ff"/>
+              <!-- Animated code lines -->
+              <rect class="code-line" x="50" y="60" width="40" height="6" rx="3" fill="#6f42c1">
+                <animate attributeName="width" values="40;60;40" dur="1.5s" repeatCount="indefinite"/>
+              </rect>
+              <rect class="code-line" x="50" y="72" width="30" height="6" rx="3" fill="#b983ff">
+                <animate attributeName="width" values="30;50;30" dur="1.2s" repeatCount="indefinite"/>
+              </rect>
+              <rect class="code-line" x="50" y="84" width="20" height="6" rx="3" fill="#6f42c1">
+                <animate attributeName="width" values="20;35;20" dur="1.1s" repeatCount="indefinite"/>
+              </rect>
+              <!-- Keyboard dots -->
+              <circle cx="60" cy="106" r="2" fill="#fff"/>
+              <circle cx="80" cy="106" r="2" fill="#fff"/>
+              <circle cx="100" cy="106" r="2" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section Start -->
+  <section class="about py-5 bg-white" id="about">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <div class="mb-4 text-center">
+              <h2 class="fw-bold mb-1">About Me</h2>
+              <p class="text-muted">Coding Is My Passion</p>
+          </div>
+          <div class="card border-0 shadow-lg p-4 position-relative" style="overflow:visible;">
+            <!-- Decorative SVG corner -->
+            <svg width="60" height="60" style="position:absolute;top:-18px;right:-18px;z-index:0;" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="30" fill="#b983ff22"/>
+              <text x="50%" y="55%" text-anchor="middle" fill="#6f42c1" font-size="22" font-family="Arial" dy=".3em">&#128187;</text>
+            </svg>
+            <p>
+            I was born in Siantar on <span class="fw-semibold text-primary">February 18, 2003</span>. 
+            My interest in programming began at the age of <span class="fw-semibold text-primary">17</span>. 
+            During high school, I studied <span class="fw-semibold text-primary">Software Engineering</span> at SMKN 1 Pematangsiantar, North Sumatra. 
+            After graduating in 2021, I pursued higher education at <span class="fw-semibold text-primary">Universitas Islam Negeri Sumatera Utara (UINSU)</span>, majoring in Information Systems.
+            </p>
+
+            <p>
+            I have now graduated with a <span class="fw-semibold text-primary">Bachelor of Computer Science</span> degree, completing my studies in 3 years and 8 months. 
+            During college, I actively joined IT communities with a strong focus on programming. 
+            I also participated in the <span class="fw-semibold text-primary">Bangkit Academy</span> program for 6 months, specializing in Cloud Computing, 
+            and completed an internship at <span class="fw-semibold text-primary">Dinas Kominfo Pematangsiantar</span> for one month. 
+            In addition, I frequently worked on various website development projects and gained experience in video editing</span>.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+              <!-- <a href="cv.pdf" class="btn btn-main-outline px-4 shadow-sm" download>
+                <i class="fas fa-download me-2"></i>Download CV
+              </a> -->
+              <a href="#contact" class="btn btn-main px-4 shadow-sm">
+                <i class="fas fa-paper-plane me-2"></i>Contact Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & Services Section Start -->
+  <section class="skills-services py-5 bg-light" id="skills">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-1">My Skills & Services</h2>
+        <p class="text-muted">What I Can Do For You</p>
+      </div>
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+          <img src="images/user.jpg" alt="Profile" class="img-fluid rounded-4 shadow" style="max-width: 320px;">
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <p class="lead">
+            I have expertise in web development, UI/UX design, and video editing. I am passionate about building modern, user-friendly, and interactive digital solutions for various needs.
+          </p>
+          <div class="d-flex align-items-center mt-3">
+            <div class="display-5 fw-bold text-primary me-3">1+</div>
+            <div>
+              <span class="fw-semibold">Years Of<br>Experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="fas fa-desktop fa-2x text-primary"></i>
+              </div>
+              <h5 class="card-title fw-bold">Web Development</h5>
+              <p class="card-text text-muted">Custom web application development using modern frameworks and best practices.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="fas fa-paint-brush fa-2x text-warning"></i>
+              </div>
+              <h5 class="card-title fw-bold">UI/UX Design</h5>
+              <p class="card-text text-muted">Designing clean, user-friendly interfaces for web and mobile applications.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="fas fa-camera-retro fa-2x text-success"></i>
+              </div>
+              <h5 class="card-title fw-bold">Video Editing</h5>
+              <p class="card-text text-muted">Editing and producing promotional videos for brands and personal projects.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="fab fa-laravel fa-2x text-danger"></i>
+              </div>
+              <h5 class="card-title fw-bold">Laravel & Codeigniter</h5>
+              <p class="card-text text-muted">Proficient in Laravel and Codeigniter for building robust web solutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section Start -->
+  <section class="techstack py-5 bg-white" id="techstack">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-1">Tech Stack</h2>
+        <p class="text-muted">Tools & Technologies I Use</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="d-flex flex-wrap justify-content-center gap-4">
+            <!-- VSCode -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode" width="48" height="48">
+              <div class="small mt-2">VSCode</div>
+            </div>
+            <!-- GitHub -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" width="48" height="48">
+              <div class="small mt-2">GitHub</div>
+            </div>
+            <!-- Cloud Computing -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" alt="Cloud Computing" width="48" height="48">
+              <div class="small mt-2">Cloud Computing</div>
+            </div>
+            <!-- React Native Expo -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native" width="48" height="48">
+              <div class="small mt-2">React Native Expo</div>
+            </div>
+            <!-- XAMPP -->
+            <div class="text-center">
+              <img src="Images/xampp.png" alt="XAMPP" width="48" height="48">
+              <div class="small mt-2">XAMPP</div>
+            </div>
+            <!-- MySQL -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="48" height="48">
+              <div class="small mt-2">MySQL</div>
+            </div>
+            <!-- Laravel -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" width="48" height="48">
+              <div class="small mt-2">Laravel</div>
+            </div>
+            <!-- CodeIgniter -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg" alt="CodeIgniter" width="48" height="48">
+              <div class="small mt-2">CodeIgniter</div>
+            </div>
+            <!-- Bootstrap -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" alt="Bootstrap" width="48" height="48">
+              <div class="small mt-2">Bootstrap</div>
+            </div>
+            <!-- Tailwind -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" width="48" height="48">
+              <div class="small mt-2">Tailwind</div>
+            </div>
+            <!-- PHP -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-plain.svg" alt="PHP" width="48" height="48">
+              <div class="small mt-2">PHP</div>
+            </div>
+            <!-- HTML -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" alt="HTML" width="48" height="48">
+              <div class="small mt-2">HTML</div>
+            </div>
+            <!-- JS -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" alt="JavaScript" width="48" height="48">
+              <div class="small mt-2">JavaScript</div>
+            </div>
+            <!-- CSS -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg" alt="CSS" width="48" height="48">
+              <div class="small mt-2">CSS</div>
+            </div>
+            <!-- C++ -->
+            <div class="text-center">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-plain.svg" alt="C++" width="48" height="48">
+              <div class="small mt-2">C++</div>
+            </div>
+            <!-- Capcut -->
+            <div class="text-center">
+              <img src="Images/capcut.png" alt="CSS" width="48" height="48">
+              <div class="small mt-2">Capcut</div>
+            </div>
+            <!-- Canva -->
+            <div class="text-center">
+              <img src="Images/canva.jpeg" alt="C++" width="48" height="48">
+              <div class="small mt-2">Canva</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section Start -->
+  <section class="projects py-5" id="projects">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-1">My Projects</h2>
+        <p class="text-muted">Some of my recent works</p>
+      </div>
+      <!-- Tabs -->
+      <div class="project-tabs text-center mb-4" data-aos="fade-up">
+        <button class="btn active" data-category="all">All</button>
+        <button class="btn" data-category="web">Web Development</button>
+        <button class="btn" data-category="uiux">UI/UX Design</button>
+        <button class="btn" data-category="video">Video Editing</button>
+      </div>
+      <!-- Project Cards -->
+      <div class="row project-cards">
+        <!-- Web Projects -->
+        
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/diskominfo/SIIB-Homepage.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Diskominfo Inventory</h5>
+              <p class="card-text">Create a diskominfo inventory website for asset management.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/skripsiku/1_muka.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Mobile App Skripsiku</h5>
+                <p class="card-text">Mobile application for Skripsiku to help students manage their thesis process.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/ramal/ramal1.jpeg" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Prediksi Produktivitas Kelapa Sawit (Forecasting)</h5>
+                <p class="card-text">A web designed to monitor and forecast palm oil productivity based on historical data, weather conditions, plant age, and fertilizer usage.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/agenda/agenda2.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Penjadwalan Agenda Kegiatan (Agendify)</h5>
+                <p class="card-text">A web application that helps users organize, schedule, and manage their activities efficiently with reminders and an easy-to-use interface.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/eco/Toko.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">E-commerce</h5>
+                <p class="card-text">A web-based platform that enables users to browse products, manage their shopping cart, and make secure online transactions with ease.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/edu/edu1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Monitoring Pembelajaran</h5>
+                <p class="card-text">A web-based system that allows teachers, students, and parents to track learning progress through reports, grades visualization, and activity monitoring.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/lahir/lahir1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Prediksi Kelahiran</h5>
+                <p class="card-text">A web-based system that utilizes historical demographic data and statistical methods to predict birth rates, providing insights for planning and decision-making.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/pangan/pangan1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">GIS Rawan Pangan (PanganGo)</h5>
+                <p class="card-text">A web-based Geographic Information System that maps and analyzes food insecurity areas, helping stakeholders identify vulnerable regions and support better decision-making.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/pos/pos1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem POS Toko Grosir</h5>
+                <p class="card-text">A Point of Sale system designed for wholesale stores to manage sales transactions, inventory, and customer data efficiently through a web-based platform.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/sigali/sigali1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Pengaduan Gangguan Listrik (SIGALI)</h5>
+                <p class="card-text">A web-based system that allows users to report electricity disruptions easily and enables service providers to manage, track, and resolve complaints more efficiently.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/sipka/sipka2.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Klasifikasi Akdemik</h5>
+                <p class="card-text">A web-based system that classifies student academic performance using data analysis, helping institutions evaluate learning outcomes and support better decision-making.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/umkm/umkm1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">GIS Pemetaan UMKM</h5>
+                <p class="card-text">A web-based Geographic Information System that maps Micro, Small, and Medium Enterprises (MSMEs), providing spatial insights to support development, decision-making, and business opportunities.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/voting/voting1.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">E-Voting Kepengurusan Organisasi</h5>
+                <p class="card-text">A web-based system that enables secure, transparent, and efficient electronic voting for organizational management, ensuring fairness and ease of participation.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/siamal/siamal.jpg" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Informasi Akademik Mal (SIAMAL)</h5>
+              <p class="card-text">A web-based academic information system for Mal, providing student and lecturer management features.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="web" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100">
+            <img src="Images/siabdos/SIABDOS-Home.png" alt="Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">Sistem Informasi Absensi Dosen (SIABDOS)</h5>
+                <p class="card-text">A web-based lecturer attendance information system for efficient management and monitoring.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- UI/UX Projects -->
+        <div class="col-md-6 col-lg-4 mb-4" data-category="uiux" data-aos="fade-up" data-aos-delay="150">
+          <div class="card h-100">
+            <img src="Images/catering/home.png" alt="UI Project" />
+            <div class="card-body">
+              <h5 class="card-title">Catering UI Website</h5>
+              <p class="card-text">Catering Website UI Design for a modern food business.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="uiux" data-aos="fade-up" data-aos-delay="50">
+          <div class="card h-100">
+            <img src="Images/prokopim/LandingPage.png" alt="Project 1" />
+            <div class="card-body">
+              <h5 class="card-title">Prokopim UI Website</h5>
+              <p class="card-text">Designing the Prokopim UI website for government information services.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="uiux" data-aos="fade-up" data-aos-delay="50">
+          <div class="card h-100">
+            <img src="Images/bus/bus.png" alt="Project 1" />
+            <div class="card-body">
+              <h5 class="card-title">Booking Ticket Bus UI Website</h5>
+                <p class="card-text">Designing a modern and user-friendly bus ticket booking website UI.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="uiux" data-aos="fade-up" data-aos-delay="50">
+          <div class="card h-100">
+            <img src="Images/marvel/marvel.png" alt="Project 1" />
+            <div class="card-body">
+              <h5 class="card-title">Booking Ticket Bioskop UI Website</h5>
+                <p class="card-text">Designing a modern and user-friendly bioskop ticket booking website UI.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="uiux" data-aos="fade-up" data-aos-delay="50">
+          <div class="card h-100">
+            <img src="Images/kursus/kursus.jpeg" alt="Project 1" />
+            <div class="card-body">
+              <h5 class="card-title">Booking Online Class UI Website</h5>
+                <p class="card-text">Designing a modern and user-friendly online class booking website UI.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Projects -->
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/sifour.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Class Cinematic Video</h5>
+                <p class="card-text">Editing cinematic video for school class.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/samosir.jpg" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Samosir Island Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/kkn.jpg" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">KKN Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/anderson.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Wes Anderson Trend</h5>
+                <p class="card-text">Editing and producing a trend video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/wisuda.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Cinematic Wisuda</h5>
+                <p class="card-text">Editing and producing a cinematic video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/quiet.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">The Quiet Videos</h5>
+                <p class="card-text">Editing and producing a quiet video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/miki.jpg" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Mikie Holiday Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/merci.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Merci Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/hairos.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Hairos Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/pamah.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Pamah Simelir Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/offroad.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Sikabung Off-Road Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/jalan.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Journey Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/deleng.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Hill Deleng 7 Dayang Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/sibayak.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Mountain Sibayak Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/huta.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Manortor Sigale-gale Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/cinevlog.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Cinevlog Banda Aceh Beach</h5>
+                <p class="card-text">Editing and producing a cinematic video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/masjid.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Cinematic Masjid Baiturrahman</h5>
+                <p class="card-text">Editing and producing a cinematic video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/museum.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Museum Tsunami Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/pkl.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">PKL Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/medan.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Cinematic Medan City</h5>
+                <p class="card-text">Editing and producing a cinematic video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/inagurasi.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Inagurasi Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/sifour3.jpg" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Marga Siliima Hill Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/sifour2.jpg" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Brastagi City Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/bukber1.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Bukber 2024 Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/bukber2.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Bukber 2025 Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-category="video" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100">
+            <img src="Images/studio.png" alt="Video Project" />
+            <div class="card-body">
+                <h5 class="card-title">Studio Photo Documentary</h5>
+                <p class="card-text">Editing and producing a documentary video.</p>
+              <a href="#" target="_blank" class="btn btn-sm btn-main-outline mt-2">View Project</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Project Gallery -->
+  <div class="modal fade" id="projectGalleryModal" tabindex="-1" aria-labelledby="projectGalleryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="projectGalleryLabel">Project Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carouselImages">
+                <!-- Images will be injected by JS -->
+                <!-- Example static structure for Bootstrap carousel (dynamic images injected by JS) -->
+                <!--
+                <div class="carousel-item active">
+                <img src="images/example1.jpg" class="d-block w-100" alt="Project Image 1">
+                </div>
+                <div class="carousel-item">
+                <img src="images/example2.jpg" class="d-block w-100" alt="Project Image 2">
+                </div>
+                -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Project Video -->
+  <div class="modal fade" id="projectVideoModal" tabindex="-1" aria-labelledby="projectVideoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="projectVideoLabel">Project Video</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0 text-center">
+          <img id="projectVideoThumb" src="" alt="Video Thumbnail" class="img-fluid mb-3" style="max-height:400px;object-fit:contain;">
+          <br>
+          <a id="projectVideoLink" href="#" target="_blank" class="btn btn-main-outline mb-3">Watch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sertifikat Section Start -->
+  <section class="sertifikat py-5 bg-light" id="sertifikat">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-1">Sertifikat</h2>
+        <p class="text-muted">My Achievements & Certifications</p>
+      </div>
+      <div class="row justify-content-center g-4">
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser1.jpg" alt="Sertifikat 1" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser2.jpg" alt="Sertifikat 2" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser3.jpg" alt="Sertifikat 3" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser4.jpg" alt="Sertifikat 4" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser5.jpg" alt="Sertifikat 5" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser6.jpg" alt="Sertifikat 6" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser7.jpg" alt="Sertifikat 7" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser8.jpg" alt="Sertifikat 8" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser9.jpg" alt="Sertifikat 9" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser10.jpg" alt="Sertifikat 10" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser11.jpg" alt="Sertifikat 11" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser12.jpg" alt="Sertifikat 12" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser13.jpg" alt="Sertifikat 13" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser14.jpg" alt="Sertifikat 14" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser15.jpg" alt="Sertifikat 15" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser16.jpg" alt="Sertifikat 16" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser17.jpg" alt="Sertifikat 17" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser18.jpg" alt="Sertifikat 18" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser19.jpg" alt="Sertifikat 19" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 shadow-sm d-flex align-items-center justify-content-center" style="border-radius:18px; overflow:hidden; width:320px; height:240px; margin:auto;">
+            <div class="bg-white p-2 d-flex align-items-center justify-content-center" style="border:6px solid #b983ff; border-radius:16px; width:300px; height:220px;">
+              <img src="sertifikat/ser20.jpg" alt="Sertifikat 20" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Me section Start -->
+  <section class="contact py-5 bg-white" id="contact">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-1">Contact Me</h2>
+        <p class="text-muted">Let's collaborate! Feel free to reach out for web development, UI/UX design, or video editing projects.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+          <div class="card border-0 shadow-sm p-4">
+            <div class="mb-3">
+              <i class="fas fa-envelope fa-2x text-primary me-2"></i>
+              <a href="mailto:yourmail@email.com" class="text-decoration-none text-dark">ardianpramana1802@gmail.com</a>
+            </div>
+            <div class="mb-3">
+              <i class="fas fa-phone fa-2x text-primary me-2"></i>
+              <a href="tel:+6281234567890" class="text-decoration-none text-dark">+62 822-8354-9484</a>
+            </div>
+            <div>
+                <a href="https://wa.me/6282283549484" target="_blank" class="btn btn-main px-4">Let's Chat</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section Start -->
+  <footer>
+    <div class="text">
+      <span>Created By <a href="#">Ardian</a> | &#169; 2024 All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS, AOS, and custom script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // AOS init
+    AOS.init({ once: true, duration: 700, offset: 60 });
+
+    // Scroll to top button
+    const scrollBtn = document.getElementById('scrollBtn');
+    window.addEventListener('scroll', function() {
+      if(window.scrollY > 300) scrollBtn.classList.add('show');
+      else scrollBtn.classList.remove('show');
+    });
+
+    // Project Tabs Filter
+    document.querySelectorAll('.project-tabs .btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.project-tabs .btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const cat = this.getAttribute('data-category');
+      document.querySelectorAll('.project-cards > div').forEach(card => {
+        if(cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Data gambar untuk setiap project (web/uiux)
+  const projectImages = {
+    "Prokopim UI Website": [
+      "images/prokopim/LandingPage.png",
+    ],
+    "Diskominfo Inventory": [
+      "images/diskominfo/SIIB-Homepage.png",
+      "images/diskominfo/SIIB-Detail1.png",
+      "images/diskominfo/SIIB-Detail2.png"
+    ],
+    "Mobile App Skripsiku": [
+      "images/skripsiku/1.png",
+      "images/skripsiku/2.png",
+      "images/skripsiku/3.png",
+      "images/skripsiku/4.png",
+      "images/skripsiku/5.png"
+    ],
+    "Sistem Prediksi Produktivitas Kelapa Sawit (Forecasting)": [
+      "images/ramal/ramal1.png",
+      "images/ramal/ramal2.png",
+      "images/ramal/ramal3.png",
+      "images/ramal/ramal4.png",
+      "images/ramal/ramal5.png"
+    ],
+    "Sistem Penjadwalan Agenda Kegiatan (Agendify)": [
+      "images/agenda/agenda1.png",
+      "images/agenda/agenda2.png",
+      "images/agenda/agenda3.png",
+      "images/agenda/agenda4.png",
+      "images/agenda/agenda5.png",
+      "images/agenda/agenda6.png"
+    ],
+    "E-commerce": [
+      "images/eco/toko1.png",
+      "images/eco/toko2.png",
+      "images/eco/toko3.png",
+      "images/eco/toko4.png",
+      "images/eco/Toko.png"
+    ],
+    "Sistem Monitoring Pembelajaran": [
+      "images/lahir/lahir1.png",
+      "images/lahir/lahir2.png",
+      "images/lahir/lahir3.png",
+      "images/lahir/lahir4.png"
+    ],
+    "Sistem Prediksi Kelahiran": [
+      "images/edu/edu1.png",
+      "images/edu/edu2.png",
+      "images/edu/edu3.png",
+      "images/edu/edu4.png",
+      "images/edu/edu5.png"
+    ],
+    "GIS Rawan Pangan (PanganGo)": [
+      "images/pangan/pangan1.png",
+      "images/pangan/pangan2.png",
+      "images/pangan/pangan3.png",
+      "images/pangan/pangan4.png",
+      "images/pangan/pangan5.png"
+    ],
+    "Sistem POS Toko Grosir": [
+      "images/pos/pos1.png",
+      "images/pos/pos2.png",
+      "images/pos/pos3.png",
+      "images/pos/pos4.png",
+      "images/pos/pos5.png"
+    ],
+    "Sistem Pengaduan Gangguan Listrik (SIGALI)": [
+      "images/sigali/sigali1.png",
+      "images/sigali/sigali2.png",
+      "images/sigali/sigali3.png"
+    ],
+    "Sistem Klasifikasi Akdemik": [
+      "images/sipka1.png",
+      "images/sipka2.png",
+      "images/sipka3.png",
+      "images/sipka4.png"
+    ],
+    "GIS Pemetaan UMKM": [
+      "images/umkm/umkm1.png",
+      "images/umkm/umkm2.png",
+      "images/umkm/umkm3.png",
+      "images/umkm/umkm4.png",
+      "images/umkm/umkm5.png"
+    ],
+    "E-Voting Kepengurusan Organisasi": [
+      "images/voting/voting1.png",
+      "images/voting/voting2.png",
+      "images/voting/voting3.png",
+      "images/voting/voting4.png",
+      "images/voting/voting5.png"
+    ],
+    "Sistem Informasi Akademik Mal (SIAMAL)": [
+      "images/siamal/siamal.jpg",
+      "images/siamal/mal1.jpeg",
+      "images/siamal/mal2.jpeg",
+      "images/siamal/mal3.jpeg",
+      "images/siamal/mal4.jpeg"
+    ],
+    "Sistem Informasi Absensi Dosen (SIABDOS)": [
+      "images/siabdos/SIABDOS-Home.png",
+      "images/siabdos/dos1.jpeg",
+      "images/siabdos/dos2.jpeg",
+      "images/siabdos/dos3.jpeg",
+      "images/siabdos/dos4.jpeg",
+      "images/siabdos/dos5.jpeg",
+    ],
+    "Catering UI Website": [
+      "images/catering/home.png",
+      "images/catering/pesan.jpg",
+      "images/catering/pembayaran_revisi.jpg",
+      "images/catering/login.jpg",
+      "images/catering/register.jpg"
+    ],
+    "Booking Ticket Bus UI Website": [
+      "images/bus/bus.png",
+    ],
+    "Booking Ticket Bioskop UI Website": [
+      "images/marvel/marvel.png",
+    ],
+    "Booking Online Class UI Website": [
+      "images/kursus/kursus.jpeg",
+    ],
+  };
+
+  // Event untuk tombol View Project
+  document.querySelectorAll('.project-cards .card').forEach(card => {
+    const btn = card.querySelector('.btn-main-outline');
+    if(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const title = card.querySelector('.card-title').innerText;
+        const cat = card.parentElement.getAttribute('data-category');
+        if(cat === 'web' || cat === 'uiux') {
+          showProjectGallery(title);
+        } else if(cat === 'video') {
+          showProjectVideo(title);
+        }
+      });
+    }
+  });
+
+  function showProjectGallery(title) {
+    const images = projectImages[title] || [];
+    const carousel = document.getElementById('carouselImages');
+    carousel.innerHTML = '';
+    if(images.length === 0) {
+      carousel.innerHTML = `<div class="carousel-item active"><div class="d-flex justify-content-center align-items-center" style="height:400px;"><span class="text-muted">No images available.</span></div></div>`;
+    } else {
+      images.forEach((img, idx) => {
+        carousel.innerHTML += `
+          <div class="carousel-item${idx===0?' active':''}">
+            <img src="${img}" class="d-block w-100" style="max-height:400px;object-fit:contain;" alt="Project Image ${idx+1}">
+          </div>
+        `;
+      });
+    }
+    document.getElementById('projectGalleryLabel').innerText = title;
+    const modal = new bootstrap.Modal(document.getElementById('projectGalleryModal'));
+    modal.show();
+
+    // Reset carousel to first slide (fix slide issue)
+    setTimeout(() => {
+      const bsCarousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('projectCarousel'));
+      bsCarousel.to(0);
+    }, 300);
+  }
+
+  const projectVideos = {
+    "Class Cinematic Video": {
+      youtube: "https://www.youtube.com/watch?v=juUxMONzIXU",
+      thumb: "https://img.youtube.com/vi/juUxMONzIXU/hqdefault.jpg"
+    },
+  
+    "Samosir Island Documentary": {
+      youtube: "https://www.youtube.com/watch?v=nc0Xxkuv_Yg",
+      thumb: "https://img.youtube.com/vi/nc0Xxkuv_Yg/hqdefault.jpg"
+    }, 
+
+    "KKN Documentary": {
+      youtube: "https://www.youtube.com/watch?v=TWY-c9wCXPM",
+      thumb: "https://img.youtube.com/vi/TWY-c9wCXPM/hqdefault.jpg"
+    },
+
+    "Wes Anderson Trend": {
+      youtube: "https://www.instagram.com/reel/CryoqVxAMd6",
+      thumb: "images/anderson.png"
+    },
+
+    "Cinematic Wisuda": {
+      youtube: "https://www.instagram.com/reel/DObEOJlkubZ",
+      thumb: "images/wisuda.png"
+    },
+
+    "The Quiet Videos": {
+      youtube: "https://www.instagram.com/reel/CrD_DpILLQu",
+      thumb: "images/quiet.png"
+    },
+
+    "Mikie Holiday Documentary": {
+      youtube: "https://www.youtube.com/watch?v=AiNzjLLatH4",
+      thumb: "https://img.youtube.com/vi/AiNzjLLatH4/hqdefault.jpg"
+    },
+
+    "Merci Documentary": {
+      youtube: "https://www.instagram.com/reel/DCUozk_hoKH",
+      thumb: "images/merci.png"
+    },
+
+    "Hairos Documentary": {
+      youtube: "https://www.instagram.com/reel/C9r6FO5yYqC",
+      thumb: "images/hairos.png"
+    },
+
+    "Pamah Simelir Documentary": {
+      youtube: "https://www.instagram.com/reel/CuunhwNLDp2",
+      thumb: "images/pamah.png"
+    },
+
+    "Sikabung Off-Road Documentary": {
+      youtube: "https://www.instagram.com/reel/DCDtNbHBWE1",
+      thumb: "images/offroad.png"
+    },
+
+    "Journey Documentary": {
+      youtube: "https://www.instagram.com/reel/DEhYBfcSzD2",
+      thumb: "images/jalan.png"
+    },
+
+    "Hill Deleng 7 Dayang Documentary": {
+      youtube: "https://www.instagram.com/reel/DKMutNdB7LT",
+      thumb: "images/deleng.png"
+    },
+
+    "Mountain Sibayak Documentary": {
+      youtube: "https://www.instagram.com/reel/DMTUf0qPc0s",
+      thumb: "images/sibayak.png"
+    },
+
+    "Manortor Sigale-gale Documentary": {
+      youtube: "https://www.instagram.com/reel/DGXoEliBn0d",
+      thumb: "images/huta.png"
+    },
+
+    "Cinevlog Banda Aceh Beach": {
+      youtube: "https://www.instagram.com/reel/DEfOPVMBknw",
+      thumb: "images/cinevlog.png"
+    },
+
+    "Cinematic Masjid Baiturrahman": {
+      youtube: "https://www.instagram.com/reel/DEhIY2shw2S",
+      thumb: "images/masjid.png"
+    },
+
+    "Museum Tsunami Documentary": {
+      youtube: "https://www.instagram.com/reel/DEjhNq1hIjE",
+      thumb: "images/museum.png"
+    },
+
+    "PKL Documentary": {
+      youtube: "https://www.instagram.com/reel/Cw-av_Yyv8_",
+      thumb: "images/pkl.png"
+    },
+
+    "Cinematic Medan City": {
+      youtube: "https://www.instagram.com/reel/CgvcyxhLEgr",
+      thumb: "images/medan.png"
+    },
+
+    "Inagurasi Documentary": {
+      youtube: "https://www.instagram.com/reel/CgdXkJTLWa8",
+      thumb: "images/inagurasi.png"
+    },
+
+    "Marga Siliima Hill Documentary": {
+      youtube: "https://www.youtube.com/watch?v=2w2nPrlvjk0",
+      thumb: "https://img.youtube.com/vi/2w2nPrlvjk0/hqdefault.jpg"
+    },
+
+    "Brastagi City Documentary": {
+      youtube: "https://www.youtube.com/watch?v=FoNnTZJ001A",
+      thumb: "https://img.youtube.com/vi/FoNnTZJ001A/hqdefault.jpg"
+    },
+
+    "Bukber 2024 Documentary": {
+      youtube: "https://www.instagram.com/reel/C5Iax2ryeyR",
+      thumb: "images/bukber1.png"
+    },
+
+    "Bukber 2025 Documentary": {
+      youtube: "https://www.instagram.com/reel/DHXkW2BBK19",
+      thumb: "images/bukber2.png"
+    },
+
+    "Studio Photo Documentary": {
+      youtube: "https://www.instagram.com/reel/DBu-li9BdCV",
+      thumb: "images/studio.png"
+    }
+  
+  };
+
+  function showProjectVideo(title) {
+    const video = projectVideos[title];
+    document.getElementById('projectVideoLabel').innerText = title;
+    document.getElementById('projectVideoThumb').src = video ? video.thumb : '';
+    document.getElementById('projectVideoLink').href = video ? video.youtube : '#';
+    const modal = new bootstrap.Modal(document.getElementById('projectVideoModal'));
+    modal.show();
+  }
+
+  function showProjectGallery(title) {
+    const images = projectImages[title] || [];
+    const carousel = document.getElementById('carouselImages');
+    carousel.innerHTML = '';
+    if(images.length === 0) {
+      carousel.innerHTML = `<div class="carousel-item active"><div class="d-flex justify-content-center align-items-center" style="height:400px;"><span class="text-muted">No images available.</span></div></div>`;
+    } else {
+      images.forEach((img, idx) => {
+        carousel.innerHTML += `
+          <div class="carousel-item${idx===0?' active':''}">
+            <img src="${img}" class="d-block w-100" style="max-height:400px;object-fit:contain;" alt="Project Image ${idx+1}">
+          </div>
+        `;
+      });
+    }
+    document.getElementById('projectGalleryLabel').innerText = title;
+    const modal = new bootstrap.Modal(document.getElementById('projectGalleryModal'));
+    modal.show();
+  }
+  </script>
+</body>
+</html>
